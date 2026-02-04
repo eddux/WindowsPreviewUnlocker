@@ -1,4 +1,4 @@
-# 🖼️ Windows Preview Unlocker
+# 🖼️ Windows Explorer Preview Unlocker
 
 > Script BAT per gestire l'anteprima dei file in Windows Explorer, inclusi i file scaricati da Internet
 
@@ -11,7 +11,7 @@
 
 ## 📋 Descrizione
 
-**Windows Preview Unlocker** è uno script batch interattivo che permette di gestire facilmente le impostazioni di anteprima dei file in Windows Explorer. Risolve il problema comune dei file PDF, Word, Excel e altri documenti che non mostrano l'anteprima, specialmente quelli scaricati da Internet.
+**Windows Explorer Preview Unlocker** è uno script batch interattivo che permette di gestire facilmente le impostazioni di anteprima dei file in Windows Explorer. Risolve il problema comune dei file PDF, Word, Excel e altri documenti che non mostrano l'anteprima, specialmente quelli scaricati da Internet.
 
 ### 🎯 Problema Risolto
 
