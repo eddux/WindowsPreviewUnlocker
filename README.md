@@ -1,3 +1,300 @@
+🖼️ Windows Explorer Preview Unlocker
+BAT script to manage file previews in Windows Explorer, including files downloaded from the Internet.
+
+📋 Description
+Windows Explorer Preview Unlocker is an interactive batch script that allows you to easily manage file preview settings in Windows Explorer. It solves the common issue of PDF, Word, Excel, and other document files not showing previews, especially those downloaded from the web.
+
+🎯 Problem Solved
+Following several Windows updates (particularly since October 2025), many users can no longer view file previews in the File Explorer preview pane. This occurs because:
+
+Preview Handlers are disabled.
+
+Windows automatically blocks files downloaded from the Internet for security.
+
+The "Mark of the Web" (MOTW) prevents previews of files considered unsafe.
+
+This script addresses all these issues through a simple and intuitive interface.
+
+✨ Features
+🔧 Preview Handlers Management
+✅ Enable/Disable preview handlers for all file types.
+
+📄 Supports PDF, Word, Excel, PowerPoint, images, and more.
+
+🔄 Reversible changes at any time.
+
+🌐 Internet File Management
+🔓 Allow previews for files downloaded from the Internet.
+
+🔒 Restore security blocking (recommended).
+
+📂 Mass unlock all files within a folder.
+
+🔍 Support for recursive subfolders.
+
+🛠️ Diagnostic Tools
+📊 Check current status of all settings.
+
+⚙️ Full reset to Windows default settings.
+
+💡 Informative messages and security warnings.
+
+🎨 User Interface
+📱 Easy-to-use interactive menu.
+
+🇬🇧 Fully available in English.
+
+⚠️ Clear and understandable security warnings.
+
+✅ Detailed feedback for every operation.
+
+🚀 Installation
+Requirements
+Windows 10 or Windows 11.
+
+Administrator privileges.
+
+PowerShell (already included in Windows).
+
+Download
+Option 1 - Release Download (Recommended):
+
+Download the latest version from the Releases page.
+
+Option 2 - Clone Repository:
+
+Bash
+git clone https://github.com/eddux/WindowsPreviewUnlocker.git
+Option 3 - Direct Download:
+
+Download the WindowsExplorerPreviewUnlocker.bat file directly.
+
+📖 Usage
+Running the Script
+Right-click the WindowsExplorerPreviewUnlocker.bat file.
+
+Select "Run as administrator".
+
+Choose the desired option from the menu.
+
+Main Menu
+========================================================
+    WINDOWS EXPLORER FILE PREVIEW MANAGEMENT
+========================================================
+
+PREVIEW HANDLERS MANAGEMENT:
+[1] Enable File Preview (Activate Preview Handlers)
+[2] Disable File Preview (Deactivate Preview Handlers)
+
+INTERNET FILE MANAGEMENT:
+[3] Allow Preview of Files Downloaded from Internet
+[4] Block Preview of Internet Files (Default/Secure)
+[5] Unlock Files in a Specific Folder
+
+DIAGNOSTICS:
+[6] Check Current Status
+[7] Restore Windows Default Settings
+
+[0] Exit
+========================================================
+🎓 Quick Guide
+To enable previews for all files:
+Run the script as administrator.
+
+Choose option [1] - Enable Preview Handlers.
+
+Activate the preview pane in File Explorer (View → Preview pane).
+
+To see previews of files downloaded from the Internet:
+Choose option [3] - Allow preview of Internet files.
+
+Confirm with Y (read the security warnings!).
+
+Restart your browser.
+
+To unlock already downloaded files:
+Choose option [5] - Unlock folder.
+
+Enter the path (e.g., C:\Users\YourName\Downloads).
+
+Choose whether to include subfolders.
+
+🔑 Modified Registry Keys
+The script modifies only 3 registry keys:
+
+1. Preview Handlers (Current User)
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+Value: ShowPreviewHandlers
+- 0 = Disabled (default)
+- 1 = Enabled
+Controls whether preview handlers display file content.
+
+2. Internet File Blocking (Current User)
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments
+Value: SaveZoneInformation
+- 1 = DO NOT block (allow preview)
+- 2 = Block (default, secure)
+Determines if Windows marks files downloaded by the current user.
+
+3. Internet File Blocking (System)
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments
+Value: SaveZoneInformation
+- 1 = DO NOT block (allow preview)
+- 2 = Block (default, secure)
+Determines if Windows marks downloaded files for all users.
+
+⚠️ Security Warnings
+🔓 Disabling Internet File Blocking
+⚠️ WARNING: Option [3] disables a Windows security protection!
+
+Risks:
+
+🦠 Files downloaded from the Internet may contain malware.
+
+🚫 You will no longer receive security warnings for potentially dangerous files.
+
+🔓 Increases the attack surface of your system.
+
+Use this option ONLY if:
+
+✅ You only download files from completely trusted sources.
+
+✅ You have an updated and active antivirus.
+
+✅ You fully understand the security risks.
+
+Recommendation: Use option [5] to unlock only specific folders instead of completely disabling protection.
+
+🔄 Reversibility
+All changes are fully reversible:
+
+✅ Option [2] → Disable preview handlers.
+
+✅ Option [4] → Restore Internet file blocking.
+
+✅ Option [7] → Restore EVERYTHING to Windows defaults.
+
+❓ FAQ (Frequently Asked Questions)
+Q: Previews still don't work after enabling Preview Handlers.
+A: Ensure you:
+
+Enable the preview pane: File Explorer → View → Preview pane.
+
+Have the appropriate software installed (Adobe Reader for PDF, Office for Word/Excel).
+
+If the file is from the Internet, unlock it using option [5].
+
+Q: Is it safe to disable Internet file blocking?
+A: No, it reduces security. It is better to:
+
+Keep blocking active (option [4]).
+
+Unlock only specific folders with trusted files (option [5]).
+
+Q: Do changes work only for me or for all users?
+A: The script modifies both:
+
+HKEY_CURRENT_USER (for you only).
+
+HKEY_LOCAL_MACHINE (for all users, requires admin).
+
+Q: Does it work on Windows Home?
+A: Yes! The script interacts with the registry directly, not via Group Policy, so it works on all Windows editions.
+
+Q: Can I use this script on multiple PCs?
+A: Yes, it is fully portable. Just copy the BAT file to other PCs.
+
+Q: Does the script modify other settings besides the registry?
+A: No, it only modifies the 3 listed registry keys. Option [5] uses PowerShell to remove attributes from files but does not modify the registry.
+
+Q: What exactly does option [5] do?
+A: It uses the PowerShell command Unblock-File to remove the "Zone.Identifier" attribute from files, which is what causes the block.
+
+🛠️ Troubleshooting
+Problem: "Access Denied" when running the script.
+Solution: Always run as administrator (Right-click → Run as administrator).
+
+Problem: PDF preview does not work.
+Solution:
+
+Install Adobe Acrobat Reader DC (free).
+
+Set Adobe as the default PDF reader.
+
+In Adobe: Edit → Preferences → General → Enable PDF thumbnail previews in Windows Explorer.
+
+Problem: Office files (Word/Excel) do not show previews.
+Solution:
+
+Install Microsoft Office.
+
+Repair Office: Settings → Apps → Microsoft Office → Modify → Repair.
+
+Ensure Office is up to date.
+
+Problem: Preview works for some files but not others.
+Solution: Files might be blocked individually:
+
+Right-click the file → Properties → Unlock.
+
+Or use option [5] to unlock the entire folder.
+
+🤝 Contributing
+Contributions, bug reports, and feature requests are welcome!
+
+Fork the project.
+
+Create a branch for your feature (git checkout -b feature/AmazingFeature).
+
+Commit your changes (git commit -m 'Add some AmazingFeature').
+
+Push to the branch (git push origin feature/AmazingFeature).
+
+Open a Pull Request.
+
+For more details, see CONTRIBUTING.md.
+
+📝 Changelog
+v1.0.0 (2026-02-04)
+✨ Initial release.
+
+✅ Preview Handlers management.
+
+🌐 Internet file blocking management.
+
+📂 Mass folder unlocking.
+
+🔍 System status diagnostics.
+
+⚙️ Default settings restoration.
+
+📄 License
+Distributed under the MIT License. See LICENSE for more information.
+
+👨‍💻 Author
+Created by eddux with ❤️ for the Windows community.
+
+🙏 Acknowledgments
+Microsoft for registry key documentation.
+
+Windows community for feedback on preview issues.
+
+All users who tested the script.
+
+📞 Support
+If you have issues or questions:
+
+🐛 Open an Issue on GitHub.
+
+💬 Join the Discussions.
+
+⭐ If this helped you
+If this project helped you, consider leaving a star ⭐ on GitHub!
+
+Note: This script is provided "as is", without warranty of any kind. Use at your own risk. Always back up your registry before making modifications.
+
+Would you like me to translate this into any other language, or perhaps help you draft the CONTRIBUTING.md file mentioned in the text?
+
 # 🖼️ Windows Explorer Preview Unlocker
 
 > Script BAT per gestire l'anteprima dei file in Windows Explorer, inclusi i file scaricati da Internet
